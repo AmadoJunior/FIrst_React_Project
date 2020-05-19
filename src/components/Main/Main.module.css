@@ -1,0 +1,22 @@
+.button{
+    color: white;
+    font: inherit;
+    border: 1px solid lightblue;
+    padding: 8px;
+    cursor: pointer;
+    transition: .5s;
+}
+.buttonGreen{
+    background-color: green;
+}
+.buttonGreen:hover{
+    background-color: lightgreen;
+    color: black;
+}
+.buttonRed{
+    background-color: red;
+}
+.buttonRed:hover{
+    background-color: salmon;
+    color: black;
+}
