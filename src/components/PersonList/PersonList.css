@@ -1,0 +1,18 @@
+
+.listTransition-enter{
+    opacity: 0;
+}
+
+.listTransition-enter-active{
+    opacity: 1;
+    transition: opacity 500ms ease-in;
+}
+
+.listTransition-exit{
+    opacity: 1;
+}
+
+.listTransition-exit-active{
+    opacity: 0;
+    transition: opacity 300ms ease-in;
+}

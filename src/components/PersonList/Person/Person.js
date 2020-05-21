@@ -18,7 +18,7 @@ import styles from "./PersonStyles.module.css";
  * ~Not only can we pass variables as props we can also pass functions as props
  */
 
-const Person = (props) => {
+function Person(props) {
 
     return (
         <div className={styles.Person}>
