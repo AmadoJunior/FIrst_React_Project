@@ -5,6 +5,9 @@ import './App.css';
 import PersonList from "../components/PersonList/PersonList";
 import Main from "../components/Main/Main";
 
+//Context
+import AuthContext from "./../context/auth-context";
+
 class App extends Component {
   /**
    * Inside class based components we have a special property named state.
@@ -30,7 +33,8 @@ class App extends Component {
       }
     ],
     showPersons: false,
-    title: "Hello World"
+    title: "Hello World",
+    authenticated: false
   }
 
   //The event object is passed automatically by React
@@ -65,6 +69,12 @@ class App extends Component {
     this.setState({persons: persons});//then we apply changes
   }
 
+  loginHandler = () => {
+    this.setState((prevState) => {
+      return {authenticated: !prevState.authenticated}
+    })
+  }
+
   //Inside this render method we input our JSX in order to render it using React.
   render() {
     /**
@@ -80,22 +90,29 @@ class App extends Component {
           <PersonList 
           clickHandler={this.deletePersonHandler}
           changedHandler={this.nameChangedHandler}
-          personsArr={this.state.persons}/>
+          personsArr={this.state.persons}
+          />
         </div> 
       )
     }
 
     return (
         <div className="App">
-
-          <Main
-          personsArr={this.state.persons}
-          title={this.state.title}
-          showPersons={this.state.showPersons}
-          togglePersonsHandler={this.togglePersonsHandler}/>
-
+          <AuthContext.Provider 
+          value={
+              {
+                authenticated: this.state.authenticated,
+                login: this.loginHandler
+              }
+            }>
+            <Main
+            personsArr={this.state.persons}
+            title={this.state.title}
+            showPersons={this.state.showPersons}
+            togglePersonsHandler={this.togglePersonsHandler}
+            />
           {personsList}
-  
+          </AuthContext.Provider>
         </div>
     );
 

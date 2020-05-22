@@ -5,7 +5,6 @@ import "./PersonList.css";
 
 function PersonList(props){
     return(
-        <div className="PersonListContainer">
             <TransitionGroup >
                 {
                 props.personsArr.map((person, index) => {
@@ -26,7 +25,6 @@ function PersonList(props){
                 })
                 }
             </TransitionGroup>
-        </div>
         )
 }
 

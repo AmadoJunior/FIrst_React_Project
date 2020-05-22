@@ -1,7 +1,20 @@
-import React from "react";
+import React, {useEffect, useRef, useContext} from "react";
 import styles from "./Main.module.css";
+import AuthContext from "./../../context/auth-context";
 
 function Main(props){
+
+    const authContext = useContext(AuthContext);
+
+    const toggleBtnRef = useRef(null);
+
+    useEffect(() => {
+        toggleBtnRef.current.click();
+
+        return () => {
+            console.log("Main cleanup work in useEffect");
+        }
+    }, []);
     
     let classList = [];
     let buttonStyle = null;
@@ -14,9 +27,9 @@ function Main(props){
     }
 
     if(props.showPersons){
-        buttonStyle = styles.buttonGreen;
-    } else {
         buttonStyle = styles.buttonRed;
+    } else {
+        buttonStyle = styles.buttonGreen;
     }
 
     return (
@@ -25,9 +38,16 @@ function Main(props){
 
             <p className={classList.join(" ")}>Dynamic Classes</p>
 
-            <button className={styles.button + " " + buttonStyle} alt={props.showPersons} onClick={props.togglePersonsHandler}>
+            <button ref={toggleBtnRef} 
+            className={styles.button + " " + buttonStyle} 
+            alt={props.showPersons} 
+            onClick={props.togglePersonsHandler}>
                 Hide/Show
             </button>
+            <button 
+                onClick={authContext.login} 
+                className={styles.button + " " + styles.buttonGreen}>
+            Log In</button>
         </div>
     )
 }

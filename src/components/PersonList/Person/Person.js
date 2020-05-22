@@ -6,6 +6,7 @@
 
 //We need to import React in order for the JSX to be read.
 import React from "react";
+import AuthContext from "./../../../context/auth-context";
 //CSS
 import styles from "./PersonStyles.module.css";
 
@@ -21,12 +22,19 @@ import styles from "./PersonStyles.module.css";
 function Person(props) {
 
     return (
-        <div className={styles.Person}>
-            <p onClick={props.click}>My name is: {props.name}</p>
-            <p>My age is: {props.age}</p>
-            <p>{props.children}</p>
-            <input type="text" onChange={props.changed} value={props.name}/>
-        </div>
+                <div className={styles.Person}>
+
+                    <AuthContext.Consumer>
+                        {
+                        (context) => context.authenticated ? <p>Authenticatd!</p> : <p>Nah</p>
+                        }
+                    </AuthContext.Consumer>
+                    
+                    <p onClick={props.click}>My name is: {props.name}</p>
+                    <p>My age is: {props.age}</p>
+                    <p>{props.children}</p>
+                    <input type="text" onChange={props.changed} value={props.name}/>
+                </div>
         /**
          * Anything inside {curlyBrackets} will be run as javascript.
          * We can only execute simple on line expression inside the brackets.
